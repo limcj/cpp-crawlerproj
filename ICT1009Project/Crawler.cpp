@@ -3,6 +3,7 @@
 //include libcurl header file
 #include <libcurl/oauthlib.h>
 #include <libcurl/twitcurl.h>
+#include <json/json.h>
 
 #define stdin  (__acrt_iob_func(0))
 #define stdout (__acrt_iob_func(1))
@@ -31,14 +32,38 @@ int main() {
     twitterObj.getOAuth().setOAuthTokenKey(myOAuthAccessTokenKey);
     twitterObj.getOAuth().setOAuthTokenSecret(myOAuthAccessTokenSecret);
 
+    string input = "";
+    int number;
 
+    cout << "Welcome to Twitter crawler!\nPlease key in the TwitterID you wish to crawl from: \n";
+    getline(cin, input);
+
+    cout << "Please enter number of data you wish to crawl : \n";
+    cin >> number;
 
     replyMsg = "";
-    printf("\nGetting public timeline\n");
-    if (twitterObj.timelinePublicGet())
+    printf("\nCrawling in progress, please wait...\n");
+    if (twitterObj.timelineUserGet(false, false, number, input))
     {
         twitterObj.getLastWebResponse(replyMsg);
-        printf("\ntwitterClient:: twitCurl::timelinePublicGet web response:\n%s\n", replyMsg.c_str());
+        //printf("\ntwitterClient:: twitCurl::timelinePublicGet web response:\n%s\n", replyMsg.c_str());
+
+        Json::Value jsonRecord;
+        Json::Reader jsonReader;
+        Json::Value jsonCreatedAt;
+
+        bool b = jsonReader.parse(replyMsg, jsonRecord);
+
+
+        jsonCreatedAt[0] = jsonRecord[0]["created_at"].asString();
+
+        cout << jsonRecord << endl;
+        cout << "Record 1" << endl;
+        cout << jsonRecord[0]["created_at"] <<endl;
+        cout << jsonRecord[0]["text"] << endl;
+        cout << "Record 2" << endl;
+        cout << jsonRecord[1]["created_at"]<<endl;
+        cout << jsonRecord[1]["text"] << endl;
     }
     else
     {
