@@ -18,5 +18,8 @@
     <ClCompile Include="Crawler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\json\jsoncpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

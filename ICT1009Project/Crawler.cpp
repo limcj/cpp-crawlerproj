@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cctype>
 #include <string>
+#include <regex>
 
 //include libcurl header file
 #include <libcurl/oauthlib.h>
@@ -25,6 +26,7 @@ int main() {
     string replyMsg;
     char tmpBuf[1024];
     twitCurl twitterObj;
+    
 
     string consumerKey = "CqVBtblqAHgoXyrnAZ2drgUaW";
     string consumerKeySecret = "nI1tVcHaZ8FBUCpdVDHKCNS9mi0QvVfg6q79gQCyf6SPOT1Cbv";
@@ -51,10 +53,12 @@ int main() {
     {
         twitterObj.getLastWebResponse(replyMsg);
 
+        regex reg("[^\\x00-\\x7F]+");
+
         Json::Value jsonRecord;
         Json::Reader jsonReader;
         Json::Value jsonCreatedAt;
-
+        
         std::ofstream myfile;
 
         bool b = jsonReader.parse(replyMsg, jsonRecord);
@@ -62,15 +66,24 @@ int main() {
 
         for (int i = 0; i < number; i++) {
 
-            std::string created_as = jsonRecord[i]["created_at"].asString();
+            //string the data lines that are to be recorded into the .csv file
+            std::string created_at = jsonRecord[i]["created_at"].asString();
             std::string created_text = jsonRecord[i]["text"].asString();
 
-            created_as.erase(std::remove(created_as.begin(), created_as.end(), ','), created_as.end());
-
+            //remove commas in the inputs as they will need to be used for columning
+            created_at.erase(std::remove(created_at.begin(), created_at.end(), ','), created_at.end());
             created_text.erase(std::remove(created_text.begin(), created_text.end(), ','), created_text.end());
 
-            if ((created_text.find("fault") != std::string::npos) || (created_text.find("maintenance") != std::string::npos)) {
-                myfile << created_as << "," << created_text << "\n";
+            //lower case the string
+            transform(created_text.begin(), created_text.end(), created_text.begin(),
+                [](unsigned char c) {return std::tolower(c); });
+
+            //replace special character ampersand with ""
+            created_text = regex_replace(created_text, reg, "");
+
+
+            if (((created_text.find("fault") != std::string::npos) || (created_text.find("Fault") != std::string::npos) || (created_text.find("maintenance") != std::string::npos) || (created_text.find("Maintenance") != std::string::npos)) && ((created_text.find("update") == std::string::npos) && (created_text.find("cleared") == std::string::npos) && (created_text.find("bplrt") == std::string::npos) && (created_text.find("@") == std::string::npos))){
+                myfile << created_at << "," << created_text << "\n";
             }
         }
       
