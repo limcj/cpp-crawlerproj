@@ -1,0 +1,6 @@
+C:\Users\alexthetechkia\source\repos\ICT1009Project\Debug\ICT1009Project.exe
+C:\Users\alexthetechkia\source\repos\ICT1009Project\Debug\ICT1009Project.pdb
+C:\Users\LIMCJ\Documents\1009\C++\Project cpp\New folder\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.exe
+C:\Users\LIMCJ\Documents\1009\C++\Project cpp\New folder\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.pdb
+C:\Users\LIMCJ\Documents\1009\C++\Project cpp\alex tries\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.exe
+C:\Users\LIMCJ\Documents\1009\C++\Project cpp\alex tries\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.pdb

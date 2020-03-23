@@ -1,0 +1,3 @@
+﻿  Crawler.cpp
+C:\Users\LIMCJ\Documents\1009\C++\Project cpp\alex tries\ICT1009ProjectTwitCurl\ICT1009Project\Crawler.cpp(21,10): warning C4101: 'tmpBuf': unreferenced local variable
+  ICT1009Project.vcxproj -> C:\Users\LIMCJ\Documents\1009\C++\Project cpp\alex tries\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.exe
