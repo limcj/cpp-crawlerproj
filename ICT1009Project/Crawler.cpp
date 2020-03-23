@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <iostream>
+#include <algorithm>
+#include <cctype>
+#include <string>
+
 //include libcurl header file
 #include <libcurl/oauthlib.h>
 #include <libcurl/twitcurl.h>
@@ -46,24 +50,39 @@ int main() {
     if (twitterObj.timelineUserGet(false, false, number, input))
     {
         twitterObj.getLastWebResponse(replyMsg);
-        //printf("\ntwitterClient:: twitCurl::timelinePublicGet web response:\n%s\n", replyMsg.c_str());
 
         Json::Value jsonRecord;
         Json::Reader jsonReader;
         Json::Value jsonCreatedAt;
 
+        std::ofstream myfile;
+
         bool b = jsonReader.parse(replyMsg, jsonRecord);
+        myfile.open("example.csv");
 
+        for (int i = 0; i < number; i++) {
 
-        jsonCreatedAt[0] = jsonRecord[0]["created_at"].asString();
+            std::string created_as = jsonRecord[i]["created_at"].asString();
+            std::string created_text = jsonRecord[i]["text"].asString();
 
-        cout << jsonRecord << endl;
+            created_as.erase(std::remove(created_as.begin(), created_as.end(), ','), created_as.end());
+
+            created_text.erase(std::remove(created_text.begin(), created_text.end(), ','), created_text.end());
+
+            if ((created_text.find("fault") != std::string::npos) || (created_text.find("maintenance") != std::string::npos)) {
+                myfile << created_as << "," << created_text << "\n";
+            }
+        }
+      
+        myfile.close();
+
+        /*cout << jsonRecord << endl;
         cout << "Record 1" << endl;
         cout << jsonRecord[0]["created_at"] <<endl;
         cout << jsonRecord[0]["text"] << endl;
         cout << "Record 2" << endl;
         cout << jsonRecord[1]["created_at"]<<endl;
-        cout << jsonRecord[1]["text"] << endl;
+        cout << jsonRecord[1]["text"] << endl;*/
     }
     else
     {
