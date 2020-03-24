@@ -27,7 +27,6 @@ int main() {
     char tmpBuf[1024];
     twitCurl twitterObj;
     
-
     string consumerKey = "CqVBtblqAHgoXyrnAZ2drgUaW";
     string consumerKeySecret = "nI1tVcHaZ8FBUCpdVDHKCNS9mi0QvVfg6q79gQCyf6SPOT1Cbv";
     string myOAuthAccessTokenKey = "1223859521325424641-y4NGB8P7ZRyRhDxuoy8HBi8aOygFQf";
@@ -38,68 +37,79 @@ int main() {
     twitterObj.getOAuth().setOAuthTokenKey(myOAuthAccessTokenKey);
     twitterObj.getOAuth().setOAuthTokenSecret(myOAuthAccessTokenSecret);
 
-    string input = "";
+    string twitterID = "";
     int number;
+    std::cout << "Welcome to Group 4 crawler! \n";
+    while (true) {
 
-    cout << "Welcome to Twitter crawler!\nPlease key in the TwitterID you wish to crawl from: \n";
-    getline(cin, input);
+        std::cout << "\nPlease select which ID you wish to crawl :\n1) SMRT Breakdowns\n2) Traffic Acccidents\n";
+        std::cin >> twitterID;
 
-    cout << "Please enter number of data you wish to crawl : \n";
-    cin >> number;
+        if ((twitterID == "1") || (twitterID == "2")) {
+            if (twitterID == "1") {
+                twitterID = "SMRT_Singapore";
+            }
+            if (twitterID == "2") {
+                twitterID = "LTAtrafficnews";
+            }
+            std::cout << "Please enter number of data you wish to crawl : \n";
+            std::cin >> number;
 
-    replyMsg = "";
-    printf("\nCrawling in progress, please wait...\n");
-    if (twitterObj.timelineUserGet(false, false, number, input))
-    {
-        twitterObj.getLastWebResponse(replyMsg);
+            std::cout << "\nCrawling in progress, this may take a few seconds...\n";
+            replyMsg = "";
+            
+            if (twitterObj.timelineUserGet(false, false, number, twitterID))
+            {
+                twitterObj.getLastWebResponse(replyMsg);
 
-        regex reg("[^\\x00-\\x7F]+");
+                regex reg("[^\\x00-\\x7F]+");
 
-        Json::Value jsonRecord;
-        Json::Reader jsonReader;
-        Json::Value jsonCreatedAt;
-        
-        std::ofstream myfile;
+                Json::Value jsonRecord;
+                Json::Reader jsonReader;
+                Json::Value jsonCreatedAt;
 
-        bool b = jsonReader.parse(replyMsg, jsonRecord);
-        myfile.open("example.csv");
+                std::ofstream myfile;
 
-        for (int i = 0; i < number; i++) {
+                bool b = jsonReader.parse(replyMsg, jsonRecord);
+                myfile.open("example.csv");
 
-            //string the data lines that are to be recorded into the .csv file
-            std::string created_at = jsonRecord[i]["created_at"].asString();
-            std::string created_text = jsonRecord[i]["text"].asString();
+                for (int i = 0; i < number; i++) {
 
-            //remove commas in the inputs as they will need to be used for columning
-            created_at.erase(std::remove(created_at.begin(), created_at.end(), ','), created_at.end());
-            created_text.erase(std::remove(created_text.begin(), created_text.end(), ','), created_text.end());
+                    //string the data lines that are to be recorded into the .csv file
+                    std::string created_at = jsonRecord[i]["created_at"].asString();
+                    std::string created_text = jsonRecord[i]["text"].asString();
 
-            //lower case the string
-            transform(created_text.begin(), created_text.end(), created_text.begin(),
-                [](unsigned char c) {return std::tolower(c); });
+                    //remove commas in the inputs as they will need to be used for columning
+                    created_text.erase(std::remove(created_text.begin(), created_text.end(), ','), created_text.end());
 
-            //replace special character ampersand with ""
-            created_text = regex_replace(created_text, reg, "");
+                    //lower case the string
+                    std::transform(created_text.begin(), created_text.end(), created_text.begin(),
+                        [](unsigned char c) {return std::tolower(c); });
 
+                    //replace special character ampersand with ""
+                    created_text = regex_replace(created_text, reg, "");
 
-            if (((created_text.find("fault") != std::string::npos) || (created_text.find("Fault") != std::string::npos) || (created_text.find("maintenance") != std::string::npos) || (created_text.find("Maintenance") != std::string::npos)) && ((created_text.find("update") == std::string::npos) && (created_text.find("cleared") == std::string::npos) && (created_text.find("bplrt") == std::string::npos) && (created_text.find("@") == std::string::npos))){
-                myfile << created_at << "," << created_text << "\n";
+                    if (twitterID == "SMRT_Singapore") {
+                        if (((created_text.find("fault") != std::string::npos) || (created_text.find("maintenance") != std::string::npos)) && (created_text.find("update") == std::string::npos) && (created_text.find("cleared") == std::string::npos) && (created_text.find("bplrt") == std::string::npos) && (created_text.find("@") == std::string::npos)) {
+                            myfile << created_at << "," << created_text << "\n";
+                        }
+                    }
+                    if (twitterID == "LTAtrafficnews") {
+                        myfile << created_at << "," << created_text << "\n";
+                    }
+                }
+                myfile.close();
+            }
+            else
+            {
+                twitterObj.getLastCurlError(replyMsg);
+                std::cout << "\ntwitterClient:: twitCurl::timelinePublicGet error:\n%s\n", replyMsg.c_str();
             }
         }
-      
-        myfile.close();
-
-        /*cout << jsonRecord << endl;
-        cout << "Record 1" << endl;
-        cout << jsonRecord[0]["created_at"] <<endl;
-        cout << jsonRecord[0]["text"] << endl;
-        cout << "Record 2" << endl;
-        cout << jsonRecord[1]["created_at"]<<endl;
-        cout << jsonRecord[1]["text"] << endl;*/
-    }
-    else
-    {
-        twitterObj.getLastCurlError(replyMsg);
-        printf("\ntwitterClient:: twitCurl::timelinePublicGet error:\n%s\n", replyMsg.c_str());
+        else
+        {
+            std::cout << "Invalid input, please select either 1 or 2 only.\n";
+            continue;
+        }
     }
 }
