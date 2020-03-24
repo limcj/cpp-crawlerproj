@@ -39,10 +39,13 @@ int main() {
 
     string twitterID = "";
     int number;
+    int fault = 0;
+    vector <string> matrix;
+
     std::cout << "Welcome to Group 4 crawler! \n";
     while (true) {
 
-        std::cout << "\nPlease select which ID you wish to crawl :\n1) SMRT Breakdowns\n2) Traffic Acccidents\n";
+        std::cout << "\nPlease select which ID you wish to crawl :\n1) Twitter SMRT Breakdowns\n2) Twitter Traffic Acccidents\n3) View Twitter SMRT Breakdown\n4) View Twitter Traffic Accidents\n5) View Chart\n";
         std::cin >> twitterID;
 
         if ((twitterID == "1") || (twitterID == "2")) {
@@ -55,7 +58,7 @@ int main() {
             std::cout << "Please enter number of data you wish to crawl : \n";
             std::cin >> number;
 
-            std::cout << "\nCrawling in progress, this may take a few seconds...\n";
+            std::cout << "\nCrawling in progress, this may take a few seconds...\n\n";
             replyMsg = "";
             
             if (twitterObj.timelineUserGet(false, false, number, twitterID))
@@ -92,10 +95,12 @@ int main() {
                     if (twitterID == "SMRT_Singapore") {
                         if (((created_text.find("fault") != std::string::npos) || (created_text.find("maintenance") != std::string::npos)) && (created_text.find("update") == std::string::npos) && (created_text.find("cleared") == std::string::npos) && (created_text.find("bplrt") == std::string::npos) && (created_text.find("@") == std::string::npos)) {
                             myfile << created_at << "," << created_text << "\n";
+
                         }
                     }
                     if (twitterID == "LTAtrafficnews") {
                         myfile << created_at << "," << created_text << "\n";
+
                     }
                 }
                 myfile.close();
@@ -105,10 +110,48 @@ int main() {
                 twitterObj.getLastCurlError(replyMsg);
                 std::cout << "\ntwitterClient:: twitCurl::timelinePublicGet error:\n%s\n", replyMsg.c_str();
             }
+        }//below code are still testing out
+        //readfile
+        fstream file;
+        file.open("example.csv");
+        string line;
+        while (getline(file, line, '\n'))
+        {
+            istringstream templine(line);
+            string data;
+            while (getline(templine, data, ','))
+            {
+                
+                matrix.push_back(data.c_str());
+            }
+        }
+        if ((twitterID == "3") || (twitterID == "4")) {
+           
+            for (int i = 0; i < matrix.size(); i++) {
+
+                std::cout << "\n" << matrix.at(i) << ' ' << "\n";
+            }
+
+            file.close();
+        }
+        
+        if (twitterID == "5") {
+            //Implement analysis, search how many faults then plot graph.
+            //size_t count = 0;
+            /*const std::string t("fault");
+            std::string::size_type pos = 0;
+            
+
+            while ((pos = matrix.find(t, pos)) != std::string::npos)
+            {
+                count++;
+                pos += t.size();
+            }   */         
+            
+            //cout << "Number of faults is: " <<count;
         }
         else
         {
-            std::cout << "Invalid input, please select either 1 or 2 only.\n";
             continue;
         }
     }
