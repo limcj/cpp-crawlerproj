@@ -40,7 +40,12 @@ int main() {
     string twitterID = "";
     int number;
     int fault = 0;
-    vector <string> matrix;
+    int maintenance = 0;
+    int track = 0;
+    int power = 0;
+    int door = 0;
+    int signal = 0;
+    int train = 0;
 
     std::cout << "Welcome to Group 4 crawler! \n";
     while (true) {
@@ -100,7 +105,6 @@ int main() {
                     }
                     if (twitterID == "LTAtrafficnews") {
                         myfile << created_at << "," << created_text << "\n";
-
                     }
                 }
                 myfile.close();
@@ -110,29 +114,60 @@ int main() {
                 twitterObj.getLastCurlError(replyMsg);
                 std::cout << "\ntwitterClient:: twitCurl::timelinePublicGet error:\n%s\n", replyMsg.c_str();
             }
-        }//below code are still testing out
-        //readfile
-        fstream file;
-        file.open("example.csv");
-        string line;
-        while (getline(file, line, '\n'))
-        {
-            istringstream templine(line);
-            string data;
-            while (getline(templine, data, ','))
-            {
-                
-                matrix.push_back(data.c_str());
-            }
         }
+      
         if ((twitterID == "3") || (twitterID == "4")) {
            
-            for (int i = 0; i < matrix.size(); i++) {
+            ifstream ip("example.csv");
 
-                std::cout << "\n" << matrix.at(i) << ' ' << "\n";
+            if (!ip.is_open()) std::cout << "ERROR: File Open" << '\n';
+
+            string tweets;
+
+            while (ip.good()) {
+
+                getline(ip, tweets, '\n');
+
+                //std::cout << tweets << "\n" << endl;
+
+                if (tweets.find("fault") != std::string::npos) {
+                    fault++;
+                }
+
+                if (tweets.find("maintenance") != std::string::npos) {
+                    maintenance++;
+                }
+
+                if (tweets.find("track") != std::string::npos) {
+                    track++;
+                }
+
+                if (tweets.find("power") != std::string::npos) {
+                    power++;
+                }
+
+                if (tweets.find("door") != std::string::npos) {
+                    door++;
+                }
+
+                if ((tweets.find("train fault") != std::string::npos) || (tweets.find("signalling") != std::string::npos)) {
+                    train++;
+                }
+
+                if (tweets.find("signal") != std::string::npos) {
+                    signal++;
+                }
+                
             }
+            std::cout << fault << "\n";
+            std::cout << maintenance << "\n";
+            std::cout << track << "\n";
+            std::cout << power << "\n";
+            std::cout << door << "\n";
+            std::cout << train << "\n";
+            std::cout << signal << "\n";
 
-            file.close();
+            ip.close();
         }
         
         if (twitterID == "5") {
