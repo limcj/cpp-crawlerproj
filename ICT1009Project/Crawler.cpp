@@ -4,6 +4,8 @@
 #include <cctype>
 #include <string>
 #include <regex>
+#include <vector>
+#include <iomanip>
 
 //include libcurl header file
 #include <libcurl/oauthlib.h>
@@ -117,7 +119,24 @@ int main() {
         }
       
         if ((twitterID == "3") || (twitterID == "4")) {
-           
+            ifstream ip("example.csv");
+
+            if (!ip.is_open()) std::cout << "ERROR: File Open" << '\n';
+
+            string tweets;
+
+            while (ip.good()) {
+
+                getline(ip, tweets, '\n');
+
+                std::cout << tweets << "\n" << endl;
+
+            }
+            ip.close();
+            
+        }
+        
+        if (twitterID == "5") {
             ifstream ip("example.csv");
 
             if (!ip.is_open()) std::cout << "ERROR: File Open" << '\n';
@@ -157,33 +176,56 @@ int main() {
                 if (tweets.find("signal") != std::string::npos) {
                     signal++;
                 }
-                
+
             }
-            std::cout << fault << "\n";
-            std::cout << maintenance << "\n";
-            std::cout << track << "\n";
-            std::cout << power << "\n";
-            std::cout << door << "\n";
-            std::cout << train << "\n";
-            std::cout << signal << "\n";
+            std::cout << "Fault: " << fault << "\n";
+            std::cout << "Maintenance: " << maintenance << "\n";
+            std::cout << "Track: " << track << "\n";
+            std::cout << "Power: " << power << "\n";
+            std::cout << "Door: " << door << "\n";
+            std::cout << "Train: " << train << "\n";
+            std::cout << "Signal: " << signal << "\n\n";
 
             ip.close();
-        }
-        
-        if (twitterID == "5") {
-            //Implement analysis, search how many faults then plot graph.
-            //size_t count = 0;
-            /*const std::string t("fault");
-            std::string::size_type pos = 0;
-            
 
-            while ((pos = matrix.find(t, pos)) != std::string::npos)
-            {
-                count++;
-                pos += t.size();
-            }   */         
-            
-            //cout << "Number of faults is: " <<count;
+            vector<int> vector1 = { fault, maintenance, track, power, door, train, signal };
+
+            string graph = "      ";
+            for (int i = 0; i < vector1.size(); i++) {
+                graph.append(to_string(1900 + 20 * i));
+                graph.append("  ");
+            }
+
+            auto max0 = vector1.size() * 6;
+            for (int i = 0; i < max0; i += 2) {
+                vector1.insert(vector1.begin() + i, vector1.at(i));
+                i += 2;
+                vector1.insert(vector1.begin() + i, 2, 0);
+                i += 2;
+                vector1.insert(vector1.begin() + i, 2, 0);
+            }
+
+            vector1.insert(vector1.begin(), 2, 0);
+
+            int max1 = *max_element(vector1.begin(), vector1.end());
+            int max2 = *max_element(vector1.begin(), vector1.end());
+            for (int i = 0; i < max1; i++) {
+                cout << right << setw(5) << (max1 * 1) - i * 1;
+                for (int j = 0; j < vector1.size(); j++) {
+                    if (vector1.at(j) >= max2) {
+                        cout << '*';
+                    }
+                    else {
+                        cout << ' ';
+                    }
+                }
+                max2--;
+                cout << endl;
+            }
+
+            cout << graph << endl;
+
+            return 0;
         }
         else
         {
