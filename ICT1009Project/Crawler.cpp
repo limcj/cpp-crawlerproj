@@ -190,13 +190,8 @@ int main() {
 
             vector<int> vector1 = { fault, maintenance, track, power, door, train, signal };
 
-            string graph = "      ";
-            for (int i = 0; i < vector1.size(); i++) {
-                graph.append(to_string(1900 + 20 * i));
-                graph.append("  ");
-            }
-
-            auto max0 = vector1.size() * 6;
+            string graph = "     Fault Maint. Track Power Door Train Signal";
+            auto max0 = vector1.size() *6;
             for (int i = 0; i < max0; i += 2) {
                 vector1.insert(vector1.begin() + i, vector1.at(i));
                 i += 2;
