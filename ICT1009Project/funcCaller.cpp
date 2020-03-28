@@ -6,17 +6,25 @@
 #include <iostream>
 #include "funcCaller.h"
 #include "twitterCrawler.h"
+#include "app_State.h"
 
 
 using namespace std;
 
 
+funcCaller::funcCaller() {
+	//an enum for state of the app so that exiting to access other functions is possible
+	APP_STATE app_state = APP_STATE::DefaultState;
+}
+
+
 //prints when app is init'd
 //general functions menu for main page
 istream& operator>>(istream& in, funcCaller& fc) {
-	std::cout << "Welcome to Group 4 crawler! \n";
+	std::cout << "\nWelcome to Group 4 crawler! \n";
 	while (true) {
-		std::cout << "\nPlease select which ID you wish to crawl :\n1) Crawl Twitter\n2) Crawl Telegram\n";
+		std::cout << "\nPlease select which ID you wish to crawl :\n1) Crawl Twitter\n2) Crawl Telegram\n3) Show Analyses\n";
+		std::cout << "To exit, please type \"exit\"\n";
 		in >> fc.input;
 		if (fc.input == "1") {
 			twitterCrawler twitc;
@@ -24,11 +32,23 @@ istream& operator>>(istream& in, funcCaller& fc) {
 			//cout << fc.input;
 			return in;
 		}
-		else if (fc.input == "2") {
+		if (fc.input == "2") {
+
+			//TO CALL TELEGRAM CLASSES HERE
 			/*teleCrawler telec;
 			cin >> telec;*/
 			//cout << fc.input;
-			return in;
+			cout << "TELE CRAWL PLS\n";
+			/*return in;*/
+		}
+		if (fc.input == "3") {
+
+			//TO CALL ANALYSIS AND COMPARISON CLASSES HERE
+			cout << "ANALYSIS PLS\n";
+			/*return in;*/
+		}
+		if (fc.input == "exit" || fc.input == "ex"){
+			break;
 		}
 		else {
 			continue;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+//#include <iostream>
 
 using namespace std;
 
@@ -13,5 +13,4 @@ private:
 
 public:
     void viewCrawledData();
-
 };

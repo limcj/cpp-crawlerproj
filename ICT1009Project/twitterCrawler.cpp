@@ -10,6 +10,8 @@
 #include "twitterCrawler.h"
 #include "crawlFunc.h"
 #include "graph.h"
+#include "app_State.h"
+#include "funcCaller.h"
 
 
 //include libcurl header file
@@ -28,10 +30,9 @@ FILE _iob[] = { *stdin, *stdout, *stderr };
 extern "C" FILE * __cdecl __iob_func(void) { return _iob; }
 extern "C" void __imp__set_output_format(void) {};
 
-
 //view the crawled data from the output .csv file
 void twitterCrawler::viewCrawledData() {
-
+	
 	//open the file twitterdata.csv
 	ifstream ip("twitterdata.csv");
 
@@ -53,7 +54,9 @@ void twitterCrawler::viewCrawledData() {
 
 istream& operator>>(istream& in, twitterCrawler& tc) {
 	while (true) {
-		std::cout << "\nPlease select which ID you wish to crawl :\n1) Crawl SMRT Breakdowns\n2) View Crawled Data\n3) Graph: Faults and Maintenance Summary\n4) Graph: Categorised Faults\n5) Graph: Faults by Line\n";
+		std::cout << "\nPlease select the ID for the function you want to run :\n1) Crawl SMRT Breakdowns\n2) View Crawled Data\n3) Graph: Faults and Maintenance Summary\n4) Graph: Categorised Faults\n5) Graph: Faults by Line\n";
+		std::cout << "\nTo get back to Main Menu, please type \"b\"\n";
+		std::cout << "To exit, please type \"exit\"\n";
 		in >> tc.input;
 		if (tc.input == "1") {
 			int data_qty;
@@ -89,6 +92,14 @@ istream& operator>>(istream& in, twitterCrawler& tc) {
 			//init a graph that shows total faults according to category
 			graphFBL catLines;
 			catLines.renderGraph();
+		}
+		if (tc.input == "exit" || tc.input == "ex") {
+			return in;
+			break;
+		}
+		if (tc.input == "b") {
+			funcCaller fc;
+			in >> fc;
 		}
 		else {
 			continue;

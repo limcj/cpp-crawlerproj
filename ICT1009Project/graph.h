@@ -1,14 +1,5 @@
 #pragma once
 
-#include <stdio.h>
-#include <iostream>
-#include <algorithm>
-#include <cctype>
-#include <string>
-#include <regex>
-#include <vector>
-#include <iomanip>
-
 using namespace std;
 
 

@@ -12,6 +12,7 @@
 #include <iomanip>
 #include "funcCaller.h"
 #include "twitterCrawler.h"
+#include "app_State.h"
 
 //include libcurl header file
 #include <libcurl/oauthlib.h>
@@ -24,7 +25,8 @@
 
 using namespace std;
 
-int main() {
+
+int main() {	
 
 	//prompt user to select a crawler
 	funcCaller fc;

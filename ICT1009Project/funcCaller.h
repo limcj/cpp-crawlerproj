@@ -17,6 +17,7 @@ private:
 	string input;
 
 public:
+	funcCaller();
 	string getInput();
 };
 
