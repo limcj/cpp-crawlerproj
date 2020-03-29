@@ -6,6 +6,7 @@
 #include <iostream>
 #include "funcCaller.h"
 #include "twitterCrawler.h"
+#include "TelegramCrawler.h"
 #include "app_State.h"
 
 
@@ -35,11 +36,11 @@ istream& operator>>(istream& in, funcCaller& fc) {
 		if (fc.input == "2") {
 
 			//TO CALL TELEGRAM CLASSES HERE
-			/*teleCrawler telec;
-			cin >> telec;*/
+			Telegramcrawler telec;
+			telec.telecrawler();
 			//cout << fc.input;
-			cout << "TELE CRAWL PLS\n";
-			/*return in;*/
+			//cout << "TELE CRAWL PLS\n";
+			//The print will be done by TelegramCrawler.cpp
 		}
 		if (fc.input == "3") {
 
