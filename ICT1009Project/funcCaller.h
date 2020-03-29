@@ -14,10 +14,11 @@ class funcCaller {
 	friend istream& operator>>(istream&, funcCaller&);
 
 private:
+
 	string input;
 
+
 public:
-	funcCaller();
 	string getInput();
 };
 

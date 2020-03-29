@@ -10,7 +10,6 @@
 #include "twitterCrawler.h"
 #include "crawlFunc.h"
 #include "graph.h"
-#include "app_State.h"
 #include "funcCaller.h"
 
 
@@ -52,11 +51,12 @@ void twitterCrawler::viewCrawledData() {
 	ip.close();
 }
 
+
 istream& operator>>(istream& in, twitterCrawler& tc) {
 	while (true) {
+		std::cout << "\n****************TWITTER FUNCTIONS****************";
 		std::cout << "\nPlease select the ID for the function you want to run :\n1) Crawl SMRT Breakdowns\n2) View Crawled Data\n3) Graph: Faults and Maintenance Summary\n4) Graph: Categorised Faults\n5) Graph: Faults by Line\n";
 		std::cout << "\nTo get back to Main Menu, please type \"b\"\n";
-		std::cout << "To exit, please type \"exit\"\n";
 		in >> tc.input;
 		if (tc.input == "1") {
 			int data_qty;
@@ -93,19 +93,15 @@ istream& operator>>(istream& in, twitterCrawler& tc) {
 			graphFBL catLines;
 			catLines.renderGraph();
 		}
-		if (tc.input == "exit" || tc.input == "ex") {
-			return in;
-			break;
-		}
 		if (tc.input == "b") {
-			funcCaller fc;
-			in >> fc;
+			break;
 		}
 		else {
 			continue;
 		}
 
 	}
+	return in;
 }
 
 

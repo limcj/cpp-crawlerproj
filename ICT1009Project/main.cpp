@@ -12,7 +12,6 @@
 #include <iomanip>
 #include "funcCaller.h"
 #include "twitterCrawler.h"
-#include "app_State.h"
 
 //include libcurl header file
 #include <libcurl/oauthlib.h>
