@@ -19,6 +19,13 @@ private:
 
 
 public:
+	//gets what user has input
 	string getInput();
+
+	//prints the splash screen
+	void print_splash();
+
+	//prints the end screen
+	void print_end();
 };
 

@@ -4,6 +4,7 @@
 
 
 #include <iostream>
+#include <conio.h>
 #include "funcCaller.h"
 #include "twitterCrawler.h"
 
@@ -14,6 +15,7 @@ using namespace std;
 //prints when app is init'd
 //general functions menu for main page
 istream& operator>>(istream& in, funcCaller& fc) {
+	fc.print_splash();
 		std::cout << "\nWelcome to Group 4 crawler! \n";
 		while (true) {
 			std::cout << "\n******************MAIN MENU******************";
@@ -41,6 +43,7 @@ istream& operator>>(istream& in, funcCaller& fc) {
 				/*return in;*/
 			}
 			if (fc.input == "exit" || fc.input == "ex") {
+				fc.print_end();
 				break;
 			}
 			else {
@@ -49,6 +52,56 @@ istream& operator>>(istream& in, funcCaller& fc) {
 
 		}
 	return in;
+}
+
+void funcCaller::print_splash() {
+	char splash[14][50] = {
+		{"  _____ _____ _______ __  ___   ___   ___  "},
+		{" |_   _/ ____|__   __/_ |/ _ \\ / _ \\ /   \\ "},
+		{"   | || |       | |   | | | | | | | | (_) |"},
+		{"   | || |       | |   | | | | | | | |\\__, |"},
+		{"  _| || |____   | |   | | |_| | |_| |  / / "},
+		{" |_____\\_____|  |_|   |_|\\___/ \\___/  /_/  "},
+		{"   _____                         _  _      "},
+		{"  / ____|                       | || |     "},
+		{" | |  __ _ __ ___  _   _ _ __   | || |_    "},
+		{" | | |_ | '__/ _ \\| | | | '_ \\  |__   _|   "},
+		{" | |__| | | | (_) | |_| | |_) |    | |     "},
+		{"  \\_____|_|  \\___/ \\__,_| .__/     |_|     "},
+		{"                        | |                "},
+		{"                        |_|                "},
+	};
+
+	cout << "\n\n\n";
+	for (int i = 0; i < 14; ++i) {
+		cout << "\n" << "\t\t\t\t    " << splash[i];
+	}
+	cout << "\n\n\n";
+	cout << "\t\t\t\t\tpress any button to proceed to app";
+	getch();
+	system("CLS");
+}
+
+void funcCaller::print_end() {
+	char end[][47] = {
+	{"   _____                 _ _                _ "},
+	{"  / ____|               | | |              | |"},
+	{" | |  __  ___   ___   __| | |__  _   _  ___| |"},
+	{" | | |_ |/ _ \\ / _ \\ / _` | '_ \\| | | |/ _ \\ |"},
+	{" | |__| | (_) | (_) | (_| | |_) | |_| |  __/_|"},
+	{"  \\_____|\\___/ \\___/ \\__,_|_.__/ \\__, |\\___(_)"},
+	{"                                  __/ |       "},
+	{"                                 |___/        "},
+	};
+
+	system("CLS");
+	cout << "\n\n\n";
+	for (int i = 0; i < 8; ++i) {
+		cout << "\n" << "\t\t\t\t    " << end[i];
+	}
+	cout << "\n\n\n";
+	getch();
+
 }
 
 string funcCaller::getInput() {

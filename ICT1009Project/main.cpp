@@ -27,7 +27,7 @@ using namespace std;
 
 int main() {	
 
-	//prompt user to select a crawler
+	//prompt user to select a function
 	funcCaller fc;
 	cin >> fc;
 
