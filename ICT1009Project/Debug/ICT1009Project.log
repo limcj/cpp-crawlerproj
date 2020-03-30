@@ -1,3 +1,20 @@
-﻿  Crawler.cpp
-C:\Users\LIMCJ\Documents\1009\C++\Project cpp\alex tries\ICT1009ProjectTwitCurl\ICT1009Project\Crawler.cpp(21,10): warning C4101: 'tmpBuf': unreferenced local variable
-  ICT1009Project.vcxproj -> C:\Users\LIMCJ\Documents\1009\C++\Project cpp\alex tries\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.exe
+﻿  TelegramCrawler.cpp
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\Telegramcrawler.h(4,1): warning C4005: 'CURL_STATICLIB': macro redefinition
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\TelegramCrawler.cpp : message : see previous definition of 'CURL_STATICLIB'
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\TelegramCrawler.cpp(28,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\TelegramCrawler.cpp(47,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\TelegramCrawler.cpp(58,23): warning C4018: '<': signed/unsigned mismatch
+  crawlFunc.cpp
+  funcCaller.cpp
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\TelegramCrawler.h(4,1): warning C4005: 'CURL_STATICLIB': macro redefinition
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\funcCaller.cpp : message : see previous definition of 'CURL_STATICLIB'
+  Generating Code...
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\funcCaller.cpp(59): warning C4715: 'operator>>': not all control paths return a value
+LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+libcurl.lib(base64.obj) : warning LNK4099: PDB 'twitcurl.pdb' was not found with 'libcurl.lib(base64.obj)' or at 'C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\twitcurl.pdb'; linking object as if no debug info
+libcurl.lib(HMAC_SHA1.obj) : warning LNK4099: PDB 'twitcurl.pdb' was not found with 'libcurl.lib(HMAC_SHA1.obj)' or at 'C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\twitcurl.pdb'; linking object as if no debug info
+libcurl.lib(oauthlib.obj) : warning LNK4099: PDB 'twitcurl.pdb' was not found with 'libcurl.lib(oauthlib.obj)' or at 'C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\twitcurl.pdb'; linking object as if no debug info
+libcurl.lib(SHA1.obj) : warning LNK4099: PDB 'twitcurl.pdb' was not found with 'libcurl.lib(SHA1.obj)' or at 'C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\twitcurl.pdb'; linking object as if no debug info
+libcurl.lib(twitcurl.obj) : warning LNK4099: PDB 'twitcurl.pdb' was not found with 'libcurl.lib(twitcurl.obj)' or at 'C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\twitcurl.pdb'; linking object as if no debug info
+libcurl.lib(urlencode.obj) : warning LNK4099: PDB 'twitcurl.pdb' was not found with 'libcurl.lib(urlencode.obj)' or at 'C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\twitcurl.pdb'; linking object as if no debug info
+  ICT1009Project.vcxproj -> C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\ICT1009Project.exe

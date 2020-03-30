@@ -4,3 +4,5 @@ C:\Users\LIMCJ\Documents\1009\C++\Project cpp\New folder\ICT1009ProjectTwitCurl\
 C:\Users\LIMCJ\Documents\1009\C++\Project cpp\New folder\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.pdb
 C:\Users\LIMCJ\Documents\1009\C++\Project cpp\alex tries\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.exe
 C:\Users\LIMCJ\Documents\1009\C++\Project cpp\alex tries\ICT1009ProjectTwitCurl\ICT1009Project\Debug\ICT1009Project.pdb
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\ICT1009Project.exe
+C:\Users\alfred ng\source\repos\1009\ICT1009Project\Debug\ICT1009Project.pdb

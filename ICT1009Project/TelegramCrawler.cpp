@@ -1,3 +1,4 @@
+//Alfred
 #include "Telegramcrawler.h" 
 #include "funcCaller.h"
 

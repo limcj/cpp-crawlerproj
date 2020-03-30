@@ -15,11 +15,54 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Crawler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="include\json\jsoncpp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="1009project.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crawlFunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="funcCaller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="twitterCrawler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TelegramCrawler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app_State.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="crawlFunc.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funcCaller.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graph.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="twitterCrawler.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TelegramCrawler.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="READ_ME.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
