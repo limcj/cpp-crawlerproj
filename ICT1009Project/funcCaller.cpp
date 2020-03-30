@@ -8,6 +8,7 @@
 #include "funcCaller.h"
 #include "twitterCrawler.h"
 #include "TelegramCrawler.h"
+#include "analysis.h"
 
 
 using namespace std;
@@ -33,15 +34,12 @@ istream& operator>>(istream& in, funcCaller& fc) {
 				//TO CALL TELEGRAM CLASSES HERE
 				Telegramcrawler telec;
 				telec.telecrawler();
-				//cout << fc.input;
-				//cout << "TELE CRAWL PLS\n";
 				//The print will be done by TelegramCrawler.cpp
 			}
 			if (fc.input == "3") {
 
 				//TO CALL ANALYSIS AND COMPARISON CLASSES HERE
-				cout << "ANALYSIS PLS\n";
-				/*return in;*/
+				analysis();
 			}
 			if (fc.input == "exit" || fc.input == "ex") {
 				fc.print_end();

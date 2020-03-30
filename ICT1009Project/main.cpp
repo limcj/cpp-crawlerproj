@@ -11,7 +11,6 @@
 #include <vector>
 #include <iomanip>
 #include "funcCaller.h"
-#include "twitterCrawler.h"
 
 //include libcurl header file
 #include <libcurl/oauthlib.h>
