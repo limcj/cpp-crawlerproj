@@ -1047,6 +1047,12 @@ void analysis()
 		//Prompts user and gets line of input
 		std::cout << "Please enter a command. To see a list of available commands, please enter <help> without chevrons (<>): ";
 		std::getline(std::cin, userinput);
+
+		//waits for user input
+		while (userinput.length() == 0) {
+			getline(std::cin, userinput);
+		}
+
 		//manipulates the input into a vector, by using space ' ' as a delimiter to split the strings
 		for (int i = 0; i < userinput.size(); i++)
 		{
